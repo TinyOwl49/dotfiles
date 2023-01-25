@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "create-react-app": "^5.0.1",
-    "create-tauri-app": "^1.0.2"
-  }
-}

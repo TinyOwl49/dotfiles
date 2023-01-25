@@ -28,7 +28,7 @@ if dein#load_state(s:dein_dir)
     call mkdir(s:rc_dir, 'p')
   endif
   let s:toml = s:rc_dir . '/dein.toml'
-  let s:lazy_toml = s:rc_dir . '/dein_lazy.toml'
+  " let s:lazy_toml = s:rc_dir . '/dein_lazy.toml'
 
   " read toml and cache
   call dein#load_toml(s:toml, {'lazy': 0})

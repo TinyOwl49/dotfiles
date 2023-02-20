@@ -1,0 +1,84 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# [[plugins]]
+# repo = 'preservim/nerdtree'
+# hook_add = '''
+#     let g:webdevicons_enable_nerdtree = 1
+# '''
+
+[[plugins]]
+repo = 'Shougo/defx.nvim'
+
+[[plugins]]
+repo = 'kristijanhusak/defx-icons'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+hook_add = '''
+    set encoding=UTF-8
+'''
+
+[[plugins]]
+repo = 'kristijanhusak/defx-git'
+
+# coc.nvim
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+hook_add = '''
+  let g:coc_global_extensions = [
+    \'coc-json',
+    \'coc-toml',
+    \'coc-pyright',
+    \'coc-yaml',
+    \'coc-html',
+    \'coc-vimlsp',
+    \'coc-rust-analyzer',
+    \'coc-snippets', 
+    \'coc-sh',
+    \'coc-tsserver'
+  \]
+  call coc#util#install()
+'''
+
+# 高性能なターミナル
+[[plugins]]
+repo = 'kassio/neoterm'
+hook_add = '''
+  let g:neoterm_autoinsert = 1
+  let g:neoterm_autoscroll = 1
+  nnoremap <leader>tl :<c-u>exec v:count.'Tclear'<cr>
+'''
+
+
+# [[plugins]]
+# repo = 'alaviss/nim.nvim'
+# on_ft = ['nim', 'nimble']
+# hook_add = '''
+# au User asyncomplete_setup call asyncomplete#register_source({
+#   \ 'name': 'nim',
+#   \ 'whitelist': ['nim'],
+#   \ 'completor': {opt, ctx -> nim#suggest#sug#GetAllCandidates({start, candidates -> asyncomplete#complete(opt['name'], ctx, start, candidates)})}
+#   \ })
+# '''
+
+
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+repo = 'vim-denops/denops-helloworld.vim'
+
+# 翻訳
+[[plugins]]
+repo = 'skanehira/translate.vim'
+hook_add = '''
+  nmap <leader>y <Plug>(Translate)
+  vmap <leader>y <Plug>(VTranslate)
+  nmap <leader>Y <cmd>Translate!<cr>
+  vmap <leader>Y <cmd>VTranslate!<cr>
+'''
+
+[[plugins]]
+repo = 'skanehira/denops-silicon.vim'

@@ -23,16 +23,21 @@ if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
   " .toml file
-  let s:rc_dir = expand('$CONFIG/nvim')
+  let s:rc_dir = expand('$CONFIG/nvim/dein/')
   if !isdirectory(s:rc_dir)
     call mkdir(s:rc_dir, 'p')
   endif
+
   let s:toml = s:rc_dir . '/dein.toml'
-  " let s:lazy_toml = s:rc_dir . '/dein_lazy.toml'
+  let s:toml_lazy = s:rc_dir . '/dein_lazy.toml'
+  let s:toml_lang = s:rc_dir . '/dein_lang.toml'
+  let s:toml_color = s:rc_dir . '/dein_color.toml'
 
   " read toml and cache
   call dein#load_toml(s:toml, {'lazy': 0})
-  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+  call dein#load_toml(s:toml_lazy, {'lazy': 1})
+  call dein#load_toml(s:toml_lang, {'lazy': 1})
+  call dein#load_toml(s:toml_color, {'lazy': 1})
 
   " end settings
   call dein#end()
@@ -58,7 +63,6 @@ endif
 " UI 
 "------------------------------------------------------------------------------
 set number
-colorscheme onedark
 syntax on
 syntax enable
 filetype plugin indent on

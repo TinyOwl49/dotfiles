@@ -1,8 +1,0 @@
-[[plugins]]
-repo = "navarasu/onedark.nvim"
-
-# [[plugins]]
-# repo = 'jonathanfilip/vim-lucius'
-
-# [[plugins]]
-# repo = 'EdenEast/nightfox.nvim'

@@ -12,4 +12,4 @@ for k, v in pairs(options) do
 	vim.opt[k] = v
 end
 
-vim.cmd("colorscheme tokyonight-storm")
+vim.cmd("colorscheme onedark_dark")

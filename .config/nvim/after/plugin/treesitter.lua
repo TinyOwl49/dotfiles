@@ -16,17 +16,15 @@ ts.setup({
 		"tsx",
 		"toml",
 		"fish",
-		"php",
 		"json",
 		"yaml",
-		"swift",
 		"css",
 		"html",
 		"lua",
 	},
 	autotag = {
 		enable = true,
-		filetypes = { "html", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+		filetypes = { "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte" },
 	},
 })
 

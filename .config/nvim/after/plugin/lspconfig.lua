@@ -35,14 +35,16 @@ vim.keymap.set("n", "ge", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	buffer = buffer,
-	callback = function()
-		if vim.lsp.buf.server_ready() then
-			vim.lsp.buf.format({ async = false })
-		end
-	end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 	buffer = buffer,
+-- 	callback = function()
+-- 		if vim.lsp.buf.server_ready() then
+-- 			vim.lsp.buf.format({ async = true })
+-- 		end
+-- 	end,
+-- })
 vim.api.nvim_create_user_command("Format", function()
 	vim.lsp.buf.format({ async = true })
 end, {})
+
+vim.keymap.set("n", "<leader>ff", "<ESC>:Format<CR>", { noremap = true, silent = true })

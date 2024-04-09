@@ -10,9 +10,10 @@ require("packer").startup(function()
 	})
 
 	use("vim-airline/vim-airline") -- ステータスバーをかっこよくする
+	use("b0o/incline.nvim") -- ファイル名をウィンドウごとに表示する
 	use("vim-airline/vim-airline-themes") -- airlineのcolorscheme
-	use("tpope/vim-fugitive")      -- gitの操作
-	use("airblade/vim-gitgutter")  --git差分の表示
+	use("tpope/vim-fugitive") -- gitの操作
+	use("airblade/vim-gitgutter") --git差分の表示
 	-- use 'obaland/vfiler.vim'
 	-- use 'obaland/vfiler-fzf'
 	-- use 'ibhagwan/fzf-lua'
@@ -53,7 +54,8 @@ require("packer").startup(function()
 
 	use("mfussenegger/nvim-dap")
 	use("rcarriga/nvim-dap-ui")
-	use("https://github.com/mfussenegger/nvim-dap-python")
+	use({ "nvim-neotest/nvim-nio" })
+	use("mfussenegger/nvim-dap-python")
 
 	-- ### colorscheme
 	use("navarasu/onedark.nvim")
@@ -64,12 +66,12 @@ require("packer").startup(function()
 	use("folke/tokyonight.nvim")
 
 	use("machakann/vim-highlightedyank") -- yankを光らせる
-	use("andweeb/presence.nvim")  -- discord rich presence
-	use("tpope/vim-commentary")   -- コメントアウトを便利にする
+	use("andweeb/presence.nvim") -- discord rich presence
+	use("tpope/vim-commentary") -- コメントアウトを便利にする
 	use("tversteeg/registers.nvim") -- レギストリを表示
 	use("machakann/vim-sandwich") -- テキストをサンドウィッチする
-	use("vim-jp/vimdoc-ja")       -- ドキュメントを日本語に
-	use("folke/neodev.nvim")      -- luaでneovim設定を書くためのプラグイン
+	use("vim-jp/vimdoc-ja") -- ドキュメントを日本語に
+	use("folke/neodev.nvim") -- luaでneovim設定を書くためのプラグイン
 	use({
 		"windwp/nvim-autopairs",
 		config = function()
@@ -77,22 +79,24 @@ require("packer").startup(function()
 				disable_filetype = { "TelescopePrompt", "vim" },
 			})
 		end,
-	})                                  -- 括弧を閉じてくれる
+	}) -- 括弧を閉じてくれる
 	use("lukas-reineke/indent-blankline.nvim") -- インデントをわかりやすく表示
-	use("skanehira/translate.vim")      -- 英語を日本語に翻訳
-	use({
-		"vim-denops/denops.vim",
-		requires = { { "vim-denops/denops-helloworld.vim" } },
-	}) -- denops
-	use({
-		"narutoxy/silicon.lua",
-		requires = { "nvim-lua/plenary.nvim" },
-	})
+	use("skanehira/translate.vim") -- 英語を日本語に翻訳
+	use("dstein64/vim-startuptime") -- neovimの起動時間を表示
+
+	-- use({
+	-- 	"vim-denops/denops.vim",
+		-- requires = { { "vim-denops/denops-helloworld.vim" } },
+	-- }) -- denops
+	-- use({
+	-- 	"narutoxy/silicon.lua",
+		-- requires = { "nvim-lua/plenary.nvim" },
+	-- })
 
 	-- ### language
 	use({
 		"numirias/semshi",
-		-- opt = true, ft = { 'python' }
+		ft = { "python" },
 	})
 	use({
 		"zah/nim.vim",
@@ -124,14 +128,14 @@ require("packer").startup(function()
 		-- 	"jsx",
 		-- 	"rescript",
 		-- },
-	})
+	}) -- ReactとかSvelteのタグを自動で閉じてくれる
 	use({
 		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		config = function()
 			require("todo-comments").setup({})
 		end,
-	})
+	}) -- コメントを目立たせたり検索したりできる
 
 	use({
 		"evanleck/vim-svelte",
@@ -143,4 +147,5 @@ require("packer").startup(function()
 			vim.g.svelte_preprocessors = { "typescript" }
 		end,
 	})
+	-- use({ "luk400/vim-jukit", ft={"ipynb", "py"}})
 end)

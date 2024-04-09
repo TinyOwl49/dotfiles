@@ -1,5 +1,5 @@
 local toggleterm = require("toggleterm")
-toggleterm.setup()
+toggleterm.setup({ close_on_exit = false })
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>t", "<ESC>:ToggleTerm direction=float<CR>", opts)

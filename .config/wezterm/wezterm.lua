@@ -29,6 +29,7 @@ config.keys = {
 -- config.color_scheme = "AdventureTime"
 config.color_scheme = "Atom"
 config.font_size = 15
+config.font = wezterm.font("JetBrains Mono")
 
 -- and finally, return the configuration to wezterm
 return config

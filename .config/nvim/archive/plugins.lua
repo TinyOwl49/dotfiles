@@ -19,7 +19,7 @@ require("packer").startup(function()
 	-- use 'ibhagwan/fzf-lua'
 	use({
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.1",
+		tag = "0.1.4",
 		requires = { { "nvim-lua/plenary.nvim" } },
 	}) -- ファイル検索
 	use({
@@ -51,6 +51,13 @@ require("packer").startup(function()
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/vim-vsnip")
 	use("onsails/lspkind.nvim")
+	use({
+		"zbirenbaum/copilot-cmp",
+		after = { "copilot.lua" },
+		config = function()
+			require("copilot_cmp").setup()
+		end,
+	})
 
 	use("mfussenegger/nvim-dap")
 	use("rcarriga/nvim-dap-ui")
@@ -83,14 +90,23 @@ require("packer").startup(function()
 	use("lukas-reineke/indent-blankline.nvim") -- インデントをわかりやすく表示
 	use("skanehira/translate.vim") -- 英語を日本語に翻訳
 	use("dstein64/vim-startuptime") -- neovimの起動時間を表示
+	use({
+		"github/copilot.vim",
+		config = function()
+			require("copilot").setup({
+				suggestion = { enabled = false },
+				panel = { enabled = false },
+			})
+		end,
+	}) -- Github Coplit
 
 	-- use({
 	-- 	"vim-denops/denops.vim",
-		-- requires = { { "vim-denops/denops-helloworld.vim" } },
+	-- requires = { { "vim-denops/denops-helloworld.vim" } },
 	-- }) -- denops
 	-- use({
 	-- 	"narutoxy/silicon.lua",
-		-- requires = { "nvim-lua/plenary.nvim" },
+	-- requires = { "nvim-lua/plenary.nvim" },
 	-- })
 
 	-- ### language
@@ -116,6 +132,9 @@ require("packer").startup(function()
 	})
 	use({
 		"windwp/nvim-ts-autotag",
+		config = function()
+			require("nvim-ts-autotag").setup()
+		end,
 		-- ft = {
 		-- 	"html",
 		-- 	"javascript",

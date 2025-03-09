@@ -1,3 +1,3 @@
-require("options")
-require("keymaps")
-require("plugins")
+require("settings.core.keymaps")
+require("settings.core.options")
+require("settings.lazy")

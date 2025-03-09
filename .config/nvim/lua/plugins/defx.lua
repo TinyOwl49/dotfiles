@@ -1,7 +1,11 @@
-vim.api.nvim_create_autocmd("Filetype", {
-	pattern = { "defx" },
-	callback = function()
-		vim.cmd([[
+return {
+	{
+		"Shougo/defx.nvim",
+		config = function()
+			vim.api.nvim_create_autocmd("Filetype", {
+				pattern = { "defx" },
+				callback = function()
+					vim.cmd([[
 		  nnoremap <silent><buffer><expr> <CR>
 		   \  defx#is_directory() ? defx#do_action('open_or_close_tree') : defx#do_action('drop')
 		  nnoremap <silent><buffer><expr> c
@@ -66,10 +70,10 @@ vim.api.nvim_create_autocmd("Filetype", {
 		  nnoremap <silent><buffer><expr> cd
 		  \ defx#do_action('change_vim_cwd')
 		]])
-	end,
-})
+				end,
+			})
 
-vim.cmd([[
+			vim.cmd([[
 	call defx#custom#option('_', {
 	      \ 'winwidth': 40,
 	      \ 'split': 'vertical',
@@ -96,3 +100,19 @@ vim.cmd([[
 	autocmd BufWritePost * call defx#redraw()
 	autocmd BufEnter * call defx#redraw()
 ]])
+		end,
+	},
+	{
+		"kristijanhusak/defx-icons",
+	},
+	{
+		"ryanoasis/vim-devicons",
+	},
+	{
+		"kristijanhusak/defx-git",
+	},
+	{
+		"folke/trouble.nvim",
+		dependencies = "nvim-tree/nvim-web-devicons",
+	},
+}

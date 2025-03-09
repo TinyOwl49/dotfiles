@@ -1,3 +1,4 @@
+# NOTE: Set file path
 function add_path() {
     export PATH=$PATH:$1
 }
@@ -45,3 +46,27 @@ fi
 
 export GEM_HOME="$HOME/.gem"
 eval "$(starship init zsh)"
+
+
+# NOTE: Antigen Package
+export _ANTIGEN_INSTALL_DIR=${HOME}/.local/bin
+source $HOME/.local/bin/antigen.zsh
+
+antigen use oh-my-zsh
+antigen bundles <<EOBUNDLES
+    # Bundles from the default repo (robbyrussell's oh-my-zsh)
+    git
+    # Syntax highlighting bundle.
+    zsh-users/zsh-syntax-highlighting
+    # Fish-like auto suggestions
+    zsh-users/zsh-autosuggestions
+    # Extra zsh completions
+    zsh-users/zsh-completions
+    # z
+    rupa/z z.sh
+    # abbr
+    olets/zsh-abbr@main
+EOBUNDLES
+
+antigen theme robbyrussell
+antigen apply

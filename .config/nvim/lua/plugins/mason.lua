@@ -1,12 +1,14 @@
 return {
 	{
 		"williamboman/mason.nvim",
+		version = "^1.0.0",
 		config = function()
 			require("mason").setup()
 		end,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
+		version = "^1.0.0",
 		config = function()
 			require("mason-lspconfig").setup_handlers({
 				function(server)

@@ -59,4 +59,16 @@ return {
 		-- neovimの起動時間を表示
 		"dstein64/vim-startuptime",
 	},
+
+	{
+		-- テンプレートを作成&読み込み
+		"glepnir/template.nvim",
+		cmd = { "Template", "TemProject" },
+		config = function()
+			require("template").setup({
+				-- config in there
+				temp_dir = '~/.config/nvim/templates'
+			})
+		end,
+	},
 }

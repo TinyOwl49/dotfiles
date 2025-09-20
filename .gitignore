@@ -1,3 +1,7 @@
 .config/zsh/.zsh_history
 .config/nvim/plugin/
 .config/nvim/.luarc.json
+.config/nvim/spell/
+.config/nvim/lazy-lock.json
+.config/nvim/lazyvim.json
+.config/nvim/nvim.log

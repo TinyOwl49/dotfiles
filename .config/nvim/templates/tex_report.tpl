@@ -1,3 +1,5 @@
+;; tex
+
 \documentclass[platex, dvipdfmx, a4paper]{jsarticle}
 \usepackage{amsmath}
 \usepackage{mathtools}

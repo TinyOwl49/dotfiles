@@ -19,11 +19,10 @@ return {
 				},
 				sources = {
 					{ name = "nvim_lsp", group_index = 1 },
-					{ name = "path", group_index = 1 },
-					{ name = "copilot", group_index = 2 },
-
-					{ name = "vsnip", group_index = 3 },
-					{ name = "buffer", group_index = 3 },
+					{ name = "path",     group_index = 1 },
+					{ name = "copilot",  group_index = 2 },
+					{ name = "vsnip",    group_index = 3 },
+					{ name = "buffer",   group_index = 3 },
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<Tab>"] = cmp.mapping.select_next_item(),

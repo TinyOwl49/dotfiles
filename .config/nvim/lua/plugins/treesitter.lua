@@ -31,6 +31,7 @@ return {
 				"markdown_inline",
 				"bash",
 				"latex",
+				"python"
 			},
 			-- autotag = {
 			-- 	enable = true,

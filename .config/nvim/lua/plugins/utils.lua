@@ -70,5 +70,5 @@ return {
 				temp_dir = '~/.config/nvim/templates'
 			})
 		end,
-	},
+	}
 }

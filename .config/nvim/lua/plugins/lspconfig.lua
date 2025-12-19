@@ -17,7 +17,8 @@
 return {
 	"neovim/nvim-lspconfig",
 	config = function()
-		vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+		vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+		vim.lsp.diagnostic.on_publish_diagnostics, {
 			underline = true,
 			virtual_text = true,
 		})
@@ -52,7 +53,6 @@ return {
 			vim.lsp.buf.format({ async = true })
 		end, {})
 
-		vim.keymap.set("n", "<leader>ff", "<ESC>:Format<CR>", { noremap = true, silent = true })
-
-	end
+		vim.keymap.set("n", "<C-f>", "<ESC>:Format<CR>", { noremap = true, silent = true })
+	end,
 }

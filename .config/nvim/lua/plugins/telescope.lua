@@ -1,6 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	tag = "v0.2.2", -- v0.2.x で previewer が nvim-treesitter main / Neovim core API に対応
+	tag = "v0.2.2", 
 	dependencies = { "nvim-lua/plenary.nvim" },
 	cmd = "Telescope",
 	keys = {

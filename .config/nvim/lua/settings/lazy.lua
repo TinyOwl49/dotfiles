@@ -15,7 +15,7 @@ require("lazy").setup("plugins", {
 	change_detection = { notify = false },
 	performance = {
 		rtp = {
-			-- 使わない標準プラグインを無効化（netrw は残す）
+			-- 使わない標準プラグインを無効化
 			disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin" },
 		},
 	},

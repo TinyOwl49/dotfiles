@@ -1,4 +1,3 @@
--- 配色は tokyonight に一本化（onedark は実質未使用だったので削除）
 return {
 	{
 		"folke/tokyonight.nvim",

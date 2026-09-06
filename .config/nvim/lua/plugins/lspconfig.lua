@@ -2,7 +2,6 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
-		-- 診断表示（旧: vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, ...) は 0.12 で削除）
 		vim.diagnostic.config({
 			underline = true,
 			severity_sort = true,
@@ -20,7 +19,6 @@ return {
 			},
 		})
 
-		-- 診断・バッファ移動は LSP に依存しないのでグローバル
 		local function gmap(lhs, rhs, desc)
 			vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, desc = desc })
 		end
@@ -32,7 +30,6 @@ return {
 		gmap("[n", function()
 			vim.diagnostic.jump({ count = 1 })
 		end, "診断: 次へ")
-		-- バッファ移動は keymaps.lua の <S-h>/<S-l> に移動（gn/gp は標準機能に戻した）
 
 		-- UI トグル
 		gmap("<leader>uh", function()
@@ -47,7 +44,6 @@ return {
 			vim.notify("diagnostic virtual_lines: " .. (on and "on" or "off"))
 		end, "トグル: 診断の複数行表示")
 
-		-- LSP 固有のキーは attach したバッファにだけ設定する（C-4）
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("user_lsp_attach", { clear = true }),
 			callback = function(ev)
@@ -63,7 +59,5 @@ return {
 				map("gN", vim.lsp.buf.rename, "LSP: リネーム")
 			end,
 		})
-
-		-- :Format / <C-f> によるフォーマットは conform.nvim（conform.lua）へ移動した
 	end,
 }

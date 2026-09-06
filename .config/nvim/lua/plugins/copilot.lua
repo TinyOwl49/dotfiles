@@ -26,15 +26,12 @@
 
 return {
 	{
-		-- copilot.vim(VimL) から copilot.lua(Lua) へ移行。
-		-- 既定ではロードしない。`:Copilot enable`（または CopilotChat 起動）で初めてロードされる。
-		-- 補完は blink-copilot 経由で blink.cmp のメニューに出すので suggestion/panel は無効化。
 		"zbirenbaum/copilot.lua",
-		cmd = "Copilot", -- :Copilot ... を叩いたときだけロード（plugin/copilot.lua が実コマンドを定義）
+		cmd = "Copilot", -- :Copilot ... を叩いたときだけロード
 		opts = {
 			suggestion = { enabled = false },
 			panel = { enabled = false },
-			filetypes = { ["*"] = true }, -- どこでも attach 可（blink 経由で使うため）
+			filetypes = { ["*"] = true }, 
 		},
 		config = function(_, opts)
 			require("copilot").setup(opts) -- init.lua が内部で command.enable() を呼ぶ
@@ -50,7 +47,6 @@ return {
 			{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
 		},
 		build = "make tiktoken", -- Only on MacOS or Linux
-		-- チャットを実際に呼んだときだけロード（tiktoken 等で ~30ms かかるため）
 		cmd = { "CopilotChat", "CopilotChatOpen", "CopilotChatToggle", "CopilotChatReset" },
 		keys = {
 			{ "<leader>cc", "<cmd>CopilotChatOpen<CR>", desc = "Copilot Chat" },

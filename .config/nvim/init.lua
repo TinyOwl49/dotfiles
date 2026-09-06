@@ -1,5 +1,4 @@
--- LSP ログが肥大化したら起動時に切り詰める（Neovim は自動ローテーションしない）。
--- vim.lsp.log.get_filename() は vim.lsp 一式を読み込む（起動時 ~13ms）ので、パスを直接組む。
+-- LSP ログが肥大化したら起動時に切り詰める
 do
 	local logpath = vim.fn.stdpath("log") .. "/lsp.log"
 	local stat = vim.uv.fs_stat(logpath)

@@ -1,11 +1,7 @@
 return {
 	"3rd/image.nvim",
-	-- 画像を描画する filetype でのみロード（integrations.markdown.filetypes と揃える）
 	ft = { "markdown", "vimwiki" },
-	dependencies = {
-		-- luarocks経由でmagickパッケージをインストールするために必要になる場合があります
-		-- お使いの環境に合わせて追加してください
-	},
+    dependencies = {},
 	opts = {
 		backend = "kitty", -- WezTermのプロトコルを明示的に指定
 		max_width = 100,

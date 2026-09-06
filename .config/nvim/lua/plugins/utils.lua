@@ -1,6 +1,6 @@
 return {
 	{
-		-- ステータスライン（vim-airline から移行。Lua 製で軽くテーマ連携も楽）
+		-- ステータスライン
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
@@ -28,7 +28,7 @@ return {
 		cmd = { "Git", "G", "Gdiffsplit", "Gvdiffsplit", "Gread", "Gwrite", "Gedit", "Gclog", "Gllog", "GBrowse", "GMove", "GRename", "GDelete" },
 	},
 	{
-		-- git 差分表示（vim-gitgutter から移行。非同期・hunk 操作・blame）
+		-- git 差分表示
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {
@@ -51,8 +51,6 @@ return {
 		"machakann/vim-highlightedyank",
 		event = "VeryLazy",
 	},
-	-- vim-commentary は削除（Neovim 0.10+ 標準の gc / gcc / gc{motion} で十分）
-	-- registers.nvim も削除（tversteeg/registers.nvim が GitHub から消滅・更新不可のため）
 	{
 		-- テキストをサンドウィッチする
 		"machakann/vim-sandwich",

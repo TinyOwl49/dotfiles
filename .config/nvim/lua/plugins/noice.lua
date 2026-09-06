@@ -14,7 +14,7 @@ end
 
 return {
 	"folke/noice.nvim",
-	event = "VeryLazy", -- 公式推奨。起動直後の数 ms だけ vim.notify 等が既定に戻るだけ
+	event = "VeryLazy", 
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 		"rcarriga/nvim-notify",

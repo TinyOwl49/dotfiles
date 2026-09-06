@@ -1,12 +1,11 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	branch = "main", -- master ブランチは凍結済み。Neovim 0.12 は main ブランチのみ対応
-	lazy = false, -- main ブランチは遅延読み込み非対応
+	branch = "main",
+	lazy = false,
 	build = ":TSUpdate",
 	config = function()
 		require("nvim-treesitter").setup()
 
-		-- vimwiki ファイルも markdown パーサーで扱う（image.nvim 連携用）
 		vim.treesitter.language.register("markdown", "vimwiki")
 
 		local parsers = {
@@ -30,12 +29,11 @@ return {
 			"haskell",
 		}
 
-		-- 未インストールのパーサーだけ非同期で導入する（起動クリティカルパスから外す）
 		vim.schedule(function()
 			require("nvim-treesitter").install(parsers)
 		end)
 
-		-- main ブランチには highlight / indent モジュールが無いので自前で有効化する
+		-- highlight / indent
 		vim.api.nvim_create_autocmd("FileType", {
 			callback = function(args)
 				local buf = args.buf

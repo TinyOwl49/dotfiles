@@ -1,10 +1,10 @@
--- キーバインドを押しかけると候補をポップアップ表示する（各 keymap の desc を読む）
+-- キーバインドを押しかけると候補をポップアップ表示する（keymap の desc ）
 return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
 	opts = {
 		preset = "modern", -- "classic"（下部）/ "helix"（右側）
-		delay = 500, -- ポップアップ表示までの待ち時間(既定 200)。
+		delay = 500, -- ポップアップ表示までの待ち時間(default: 200)。
 		spec = {
 			{ "<leader>b", group = "Buffer" },
 			{ "<leader>c", group = "Copilot" },

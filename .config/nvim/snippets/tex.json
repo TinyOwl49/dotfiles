@@ -1,0 +1,58 @@
+{
+    "Fraction": {
+        "prefix": [
+            "frac",
+            "ff"
+        ],
+        "body": "\\frac{$1}{$2}$0",
+        "description": "分数  \\frac{}{}"
+    },
+    "Displaystyle fraction": {
+        "prefix": [
+            "dfrac",
+            "df"
+        ],
+        "body": "\\dfrac{$1}{$2}$0",
+        "description": "displaystyle 分数  \\dfrac{}{}"
+    },
+    "Partial Diff": {
+        "prefix": [
+            "pdfrac",
+            "pdf"
+        ],
+        "body": "\\frac{\\partial $1}{\\partial $2}$0",
+        "description": "偏微分  \\frac{}{}"
+
+    },
+    "Square root": {
+        "prefix": [
+            "sqrt",
+            "sq"
+        ],
+        "body": "\\sqrt{$1}$0",
+        "description": "平方根  \\sqrt{}"
+    },
+    "Nth root": {
+        "prefix": "nsqrt",
+        "body": "\\sqrt[$1]{$2}$0",
+        "description": "n 乗根  \\sqrt[]{}"
+    },
+    "Sum": {
+        "prefix": "sum",
+        "body": "\\sum_{$1}^{$2} $0",
+        "description": "総和  \\sum_{}^{}"
+    },
+    "Integral": {
+        "prefix": "int",
+        "body": "\\int_{$1}^{$2} $3 \\, d$4 $0",
+        "description": "定積分  \\int_{}^{}"
+    },
+    "Environment": {
+        "prefix": [
+            "begin",
+            "env"
+        ],
+        "body": "\\begin{$1}\n\t$0\n\\end{$1}",
+        "description": "\\begin{} ... \\end{}"
+    }
+}

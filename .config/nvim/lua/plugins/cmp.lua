@@ -1,95 +1,59 @@
+-- 補完: blink.cmp（nvim-cmp + cmp-* + vim-vsnip + lspkind から移行）
+-- Rust 製ファジーマッチャ内蔵の一体型。スニペット・アイコン・シグネチャも本体で完結。
+-- version = "1.*" はリリースのプリビルドバイナリを使うので Rust ツールチェーン不要。
 return {
 	{
-		"hrsh7th/nvim-cmp",
-		opts = function(_, opts)
-			opts.sources = opts.sources or {}
-			table.insert(opts.sources, {
-				name = "lazydev",
-				group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-			})
-		end,
-		config = function()
-			local cmp = require("cmp")
-			local lspkind = require("lspkind")
-			cmp.setup({
-				snippet = {
-					expand = function(args)
-						vim.fn["vsnip#anonymous"](args.body)
-					end,
+		"saghen/blink.cmp",
+		version = "1.*",
+		event = { "InsertEnter", "CmdlineEnter" },
+		dependencies = {
+			"rafamadriz/friendly-snippets", -- スニペット集（vim-vsnip の置き換え相当）
+			"fang2hou/blink-copilot", -- Copilot を補完ソースに
+		},
+		opts = {
+			keymap = {
+				preset = "default", -- C-space:表示 / C-y:確定 / C-e:非表示 / C-n,C-p:選択 / C-b,C-f:doc スクロール / C-k:シグネチャ
+				["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+				["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+				["<C-p>"] = { "select_prev", "fallback" },
+				["<CR>"] = { "accept", "fallback" },
+				["<C-l>"] = { "show", "fallback" },
+			},
+			appearance = {
+				nerd_font_variant = "mono",
+			},
+			completion = {
+				documentation = { auto_show = true, auto_show_delay_ms = 200 },
+				ghost_text = { enabled = true }, -- 旧 experimental.ghost_text 相当
+			},
+			signature = { enabled = true },
+			sources = {
+				-- Copilot は「起動中のときだけ」補完ソースに入れる。
+				-- 既定では copilot.lua をロードしない（:Copilot enable でロード＆有効化）ため、
+				-- package.loaded を見て未ロードなら触らない（lazy の require フックを踏まない）。
+				default = function()
+					local srcs = { "lsp", "path", "snippets", "buffer", "lazydev" }
+					local cc = package.loaded["copilot.client"]
+					if cc and cc.get and cc.get() ~= nil then
+						srcs[#srcs + 1] = "copilot"
+					end
+					return srcs
+				end,
+				providers = {
+					lazydev = {
+						name = "LazyDev",
+						module = "lazydev.integrations.blink",
+						score_offset = 100, -- 旧 group_index = 0 相当（LuaLS より優先）
+					},
+					copilot = {
+						name = "copilot",
+						module = "blink-copilot",
+						score_offset = 100,
+						async = true,
+					},
 				},
-				sources = {
-					{ name = "nvim_lsp", group_index = 1 },
-					{ name = "path",     group_index = 1 },
-					{ name = "copilot",  group_index = 2 },
-					{ name = "vsnip",    group_index = 3 },
-					{ name = "buffer",   group_index = 3 },
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<Tab>"] = cmp.mapping.select_next_item(),
-					["<C-p>"] = cmp.mapping.select_prev_item(),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-l>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-				}),
-				experimental = {
-					ghost_text = true,
-				},
-				-- formatting = {
-				-- 	format = lspkind.cmp_format({
-				-- 		mode = "symbol", -- show only symbol annotations
-				-- 		maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-				-- 		ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-				-- 		symbol_map = { Copilot = "" },
-
-				-- 		-- The function below will be called before any actual modifications from lspkind
-				-- 		-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-				-- 		before = function(entry, vim_item)
-				-- 			return vim_item
-				-- 		end,
-				-- 	}),
-				-- },
-			})
-			cmp.setup.cmdline("/", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = "buffer" },
-				},
-			})
-
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "path" },
-				}, {
-					{ name = "cmdline" },
-				}),
-			})
-		end,
+			},
+			fuzzy = { implementation = "prefer_rust_with_warning" },
+		},
 	},
-	{
-		"hrsh7th/cmp-path",
-	},
-	{
-		"hrsh7th/cmp-buffer",
-	},
-	{
-		"hrsh7th/cmp-cmdline",
-	},
-	{
-		"hrsh7th/cmp-nvim-lsp",
-	},
-	{
-		"hrsh7th/vim-vsnip",
-	},
-	{
-		"onsails/lspkind.nvim",
-	},
-	-- {
-	-- 	"zbirenbaum/copilot-cmp",
-	-- 	config = function()
-	-- 		require("copilot_cmp").setup()
-	-- 	end,
-	-- },
 }

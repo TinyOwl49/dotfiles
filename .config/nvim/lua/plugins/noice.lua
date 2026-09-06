@@ -14,6 +14,7 @@ end
 
 return {
 	"folke/noice.nvim",
+	event = "VeryLazy", -- 公式推奨。起動直後の数 ms だけ vim.notify 等が既定に戻るだけ
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 		"rcarriga/nvim-notify",
@@ -25,7 +26,7 @@ return {
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = true,
+					-- cmp.entry.get_documentation は nvim-cmp 専用。blink.cmp 移行で削除
 				},
 			},
 			-- you can enable a preset for easier configuration

@@ -8,7 +8,7 @@ local config = wezterm.config_builder()
 -- In newer versions of wezterm, use the config_builder which will
 -- help provide clearer error messages
 
-config.leader = { key = "q", mods = "CTRL", timeout_milliseconds = 1000 }
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
 	{ key = "y", mods = "CTRL", action = "ActivateCopyMode" },
 	{ key = "q", mods = "CTRL", action = act.CloseCurrentTab({ confirm = true }) },

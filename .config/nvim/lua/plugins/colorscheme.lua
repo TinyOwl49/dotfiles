@@ -1,17 +1,13 @@
+-- 配色は tokyonight に一本化（onedark は実質未使用だったので削除）
 return {
 	{
-		"navarasu/onedark.nvim",
-		lazy = false,
-		opts = { style = "dark" },
-		-- config = function()
-		-- 	require('onedark').load()
-		-- end
-	},
-	{
 		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000, -- 他プラグインより先にロード
 		opts = { style = "storm" },
-		config = function()
-			require('tokyonight').load()
-		end
+		config = function(_, opts)
+			require("tokyonight").setup(opts)
+			vim.cmd.colorscheme("tokyonight")
+		end,
 	},
 }

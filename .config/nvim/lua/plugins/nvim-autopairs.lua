@@ -1,9 +1,8 @@
 -- 括弧を閉じてくれる
-return	{
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup({
-				disable_filetype = { "TelescopePrompt", "vim" },
-			})
-		end,
+return {
+	"windwp/nvim-autopairs",
+	event = "InsertEnter",
+	opts = {
+		disable_filetype = { "TelescopePrompt", "vim" },
+	},
 }

@@ -1,58 +1,69 @@
--- require("mason-lspconfig").setup_handlers({
--- 	function(server)
--- 		local opt = {
--- 			on_attach = function(client, bufnr)
--- 				-- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
--- 			end,
--- 			capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
--- 		}
--- 		require("lspconfig")[server].setup(opt)
--- 	end,
--- })
--- vim.diagnostic.config({
--- 	virtual_text = false,
--- 	underline = true,
--- })
-
 return {
 	"neovim/nvim-lspconfig",
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
-		vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-		vim.lsp.diagnostic.on_publish_diagnostics, {
+		-- 診断表示（旧: vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, ...) は 0.12 で削除）
+		vim.diagnostic.config({
 			underline = true,
-			virtual_text = true,
+			severity_sort = true,
+			update_in_insert = false,
+			virtual_text = { spacing = 2, prefix = "●" },
+			virtual_lines = { current_line = true }, -- カーソル行だけ複数行で詳細表示
+			float = { border = "rounded", source = true },
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = "󰅚 ",
+					[vim.diagnostic.severity.WARN] = "󰀪 ",
+					[vim.diagnostic.severity.INFO] = "󰋽 ",
+					[vim.diagnostic.severity.HINT] = "󰌶 ",
+				},
+			},
 		})
 
-		-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { separator = true })
-		-- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { separator = true })
+		-- 診断・バッファ移動は LSP に依存しないのでグローバル
+		local function gmap(lhs, rhs, desc)
+			vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, desc = desc })
+		end
+		gmap("<C-e>", vim.diagnostic.open_float, "診断: フロート表示")
+		gmap("ge", vim.diagnostic.open_float, "診断: フロート表示")
+		gmap("[p", function()
+			vim.diagnostic.jump({ count = -1 })
+		end, "診断: 前へ")
+		gmap("[n", function()
+			vim.diagnostic.jump({ count = 1 })
+		end, "診断: 次へ")
+		-- バッファ移動は keymaps.lua の <S-h>/<S-l> に移動（gn/gp は標準機能に戻した）
 
-		local opts = { noremap = true, silent = true }
-		vim.keymap.set("n", "<C-h>", vim.lsp.buf.hover, opts)
-		vim.keymap.set("n", "<C-e>", vim.diagnostic.open_float, opts)
-		vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-		vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-		vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-		vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-		vim.keymap.set("n", "gN", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-		vim.keymap.set("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-		vim.keymap.set("n", "ge", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-		vim.keymap.set("n", "[p", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-		vim.keymap.set("n", "[n", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-		vim.keymap.set("n", "gn", "<cmd>bnext<CR>", opts)
-		vim.keymap.set("n", "gp", "<cmd>bprevious<CR>", opts)
+		-- UI トグル
+		gmap("<leader>uh", function()
+			local on = not vim.lsp.inlay_hint.is_enabled()
+			vim.lsp.inlay_hint.enable(on)
+			vim.notify("inlay hints: " .. (on and "on" or "off"))
+		end, "トグル: inlay hints")
+		gmap("<leader>ul", function()
+			local cfg = vim.diagnostic.config()
+			local on = not (cfg.virtual_lines and cfg.virtual_lines ~= false)
+			vim.diagnostic.config({ virtual_lines = on and { current_line = true } or false })
+			vim.notify("diagnostic virtual_lines: " .. (on and "on" or "off"))
+		end, "トグル: 診断の複数行表示")
 
-		-- vim.api.nvim_create_autocmd("BufWritePre", {
-		-- 	buffer = buffer,
-		-- 	callback = function()
-		-- 		if vim.lsp.buf.server_ready() then
-		-- 			vim.lsp.buf.format({ async = true })
-		-- 		end
-		-- 	end,
-		-- })
-		vim.api.nvim_create_user_command("Format", function()
-			vim.lsp.buf.format({ async = true })
-		end, {})
+		-- LSP 固有のキーは attach したバッファにだけ設定する（C-4）
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("user_lsp_attach", { clear = true }),
+			callback = function(ev)
+				local function map(lhs, rhs, desc)
+					vim.keymap.set("n", lhs, rhs, { buffer = ev.buf, silent = true, desc = desc })
+				end
+				map("<C-h>", vim.lsp.buf.hover, "LSP: ホバー")
+				map("<C-k>", vim.lsp.buf.signature_help, "LSP: シグネチャヘルプ")
+				map("gd", vim.lsp.buf.definition, "LSP: 定義へ")
+				map("gD", vim.lsp.buf.declaration, "LSP: 宣言へ")
+				map("gr", vim.lsp.buf.references, "LSP: 参照一覧")
+				map("gi", vim.lsp.buf.implementation, "LSP: 実装へ")
+				map("gN", vim.lsp.buf.rename, "LSP: リネーム")
+			end,
+		})
 
-		vim.keymap.set("n", "<C-f>", "<ESC>:Format<CR>", { noremap = true, silent = true })
+		-- :Format / <C-f> によるフォーマットは conform.nvim（conform.lua）へ移動した
 	end,
 }

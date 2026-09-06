@@ -25,26 +25,45 @@
 -- More info:
 
 return {
-	-- {
-	-- 	"zbirenbaum/copilot.lua",
-	-- 	event = "InsertEnter",
-	-- 	config = function()
-	-- 		require("copilot").setup({
-	-- 			filetype = {
-	-- 				markdown = false,
-	-- 			},
-	-- 			suggestion = { enabled = false },
-	-- 			panel = { enabled = false },
-	-- 		})
-	-- 	end,
-	-- },
+	{
+		-- copilot.vim(VimL) から copilot.lua(Lua) へ移行。
+		-- 既定ではロードしない。`:Copilot enable`（または CopilotChat 起動）で初めてロードされる。
+		-- 補完は blink-copilot 経由で blink.cmp のメニューに出すので suggestion/panel は無効化。
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot", -- :Copilot ... を叩いたときだけロード（plugin/copilot.lua が実コマンドを定義）
+		opts = {
+			suggestion = { enabled = false },
+			panel = { enabled = false },
+			filetypes = { ["*"] = true }, -- どこでも attach 可（blink 経由で使うため）
+		},
+		config = function(_, opts)
+			require("copilot").setup(opts) -- init.lua が内部で command.enable() を呼ぶ
+			-- 既定はオフ。ロード直後にいったん無効化し、ユーザーが :Copilot enable した時だけ有効化する。
+			-- （lazy は :Copilot <sub> を stub 経由でロード後に再実行するので enable も正しく効く）
+			require("copilot.command").disable()
+		end,
+	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
 		dependencies = {
-			{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+			{ "zbirenbaum/copilot.lua" },
 			{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
 		},
 		build = "make tiktoken", -- Only on MacOS or Linux
+		-- チャットを実際に呼んだときだけロード（tiktoken 等で ~30ms かかるため）
+		cmd = { "CopilotChat", "CopilotChatOpen", "CopilotChatToggle", "CopilotChatReset" },
+		keys = {
+			{ "<leader>cc", "<cmd>CopilotChatOpen<CR>", desc = "Copilot Chat" },
+			{ "<leader>ce", desc = "Copilot: Explain",  mode = { "n", "x" } },
+			{ "<leader>cr", desc = "Copilot: Review",   mode = { "n", "x" } },
+			{ "<leader>cf", desc = "Copilot: Fix",      mode = { "n", "x" } },
+			{ "<leader>co", desc = "Copilot: Optimize", mode = { "n", "x" } },
+			{ "<leader>cd", desc = "Copilot: Docs",     mode = { "n", "x" } },
+			{ "<leader>cD", desc = "Copilot: FixDiagnostic" },
+			{ "<leader>ct", desc = "Copilot: Tests",    mode = { "n", "x" } },
+			{ "<leader>cg", desc = "Copilot: Commit" },
+			{ "<leader>cs", desc = "Copilot: CommitStaged" },
+		},
 		opts = {
 			-- See Configuration section for options
 		},
@@ -86,8 +105,8 @@ return {
 					},
 					FixDiagnostic = {
 						prompt = "コードの診断結果に従って問題を修正してください。修正内容の説明は日本語でお願いします。",
-						mapping = "<leader>cd",
-						description = "コードの修正をお願いする",
+						mapping = "<leader>cD", -- Docs と重複していたため変更
+						description = "診断結果に従ってコードの修正をお願いする",
 						selection = require("CopilotChat.select").diagnostics,
 					},
 					Commit = {

@@ -17,14 +17,6 @@ return {
 			"rescript",
 		},
 	}, -- ReactとかSvelteのタグを自動で閉じてくれる
-	{
-		"evanleck/vim-svelte",
-		dependencies = {
-			"othree/html5.vim",
-			"pangloss/vim-javascript",
-		},
-		config = function()
-			vim.g.svelte_preprocessors = { "typescript" }
-		end,
-	},
+	-- vim-svelte / html5.vim / vim-javascript（旧 VimL）は削除。
+	-- .svelte は Neovim 標準の filetype 判定 + treesitter(svelte) + svelte-language-server で対応。
 }

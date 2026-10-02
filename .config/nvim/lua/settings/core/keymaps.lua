@@ -40,7 +40,7 @@ map({ "n", "x" }, "<leader>d", [["_d]], "ブラックホールへ削除")
 map("n", "x", [["_x]], "1文字削除（レジスタ非汚染）")
 
 -- 保存・バッファ 
-map("n", "<leader>w", "<cmd>write<CR>", "保存")
+map("n", "<leader>bs", "<cmd>write<CR>", "バッファを保存")
 map("n", "<leader>bd", "<cmd>bdelete<CR>", "バッファを閉じる")
 map("n", "<S-l>", "<cmd>bnext<CR>", "次のバッファ")
 map("n", "<S-h>", "<cmd>bprevious<CR>", "前のバッファ")

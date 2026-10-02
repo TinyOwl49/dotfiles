@@ -1,0 +1,78 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+
+(../../../../../var/folders/9l/hfv7s0d91dn6z386g7_jgk_80000gn/T//../../../../..
+/var/folders/9l/hfv7s0d91dn6z386g7_jgk_80000gn/T/orgtex2tfgrq.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/size10.clo))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/graphics/color.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/graphics-def/dvips.def)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/graphics/dvipsnam.def)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/fontspec/fontspec.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-dvips.def)))
+
+! Fatal Package fontspec Error: The fontspec package requires either XeTeX or
+(fontspec)                      LuaTeX.
+(fontspec)
+(fontspec)                      You must change your typesetting engine to,
+(fontspec)                      e.g., "xelatex" or "lualatex" instead of
+(fontspec)                      "latex" or "pdflatex".
+
+Type <return> to continue.
+ ...
+
+l.95 \msg_fatal:nn {fontspec} {cannot-use-pdftex}
+
+
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+
+(../../../../../var/folders/9l/hfv7s0d91dn6z386g7_jgk_80000gn/T//../../../../..
+/var/folders/9l/hfv7s0d91dn6z386g7_jgk_80000gn/T/orgtexa2I0Eg.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/size10.clo))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/graphics/color.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/graphics-def/dvips.def)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/graphics/dvipsnam.def)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2024/texmf-dist/tex/latex/fontspec/fontspec.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-dvips.def)))
+
+! Fatal Package fontspec Error: The fontspec package requires either XeTeX or
+(fontspec)                      LuaTeX.
+(fontspec)
+(fontspec)                      You must change your typesetting engine to,
+(fontspec)                      e.g., "xelatex" or "lualatex" instead of
+(fontspec)                      "latex" or "pdflatex".
+
+Type <return> to continue.
+ ...
+
+l.95 \msg_fatal:nn {fontspec} {cannot-use-pdftex}
